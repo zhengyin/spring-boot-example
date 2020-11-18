@@ -1,9 +1,9 @@
 package com.izhengyin.springboot.example.cache.test;
+import com.izhengyin.springboot.cache.constant.RedisInstance;
 import com.izhengyin.springboot.example.cache.Application;
 import com.izhengyin.springboot.example.cache.service.CacheEvictService;
 import com.izhengyin.springboot.example.cache.service.WelcomeService;
 import com.izhengyin.springboot.example.cache.task.CacheEvictTask;
-import com.kongfz.util.cache.constant.RedisInstance;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

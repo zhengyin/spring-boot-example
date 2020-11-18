@@ -1,9 +1,9 @@
 package com.izhengyin.springboot.example.cache.controller.v1;
 
+import com.izhengyin.springboot.cache.constant.CacheDrive;
+import com.izhengyin.springboot.cache.constant.CacheName;
+import com.izhengyin.springboot.cache.constant.GeneratorName;
 import com.izhengyin.springboot.example.cache.service.CacheEvictService;
-import com.kongfz.util.cache.constant.CacheDrive;
-import com.kongfz.util.cache.constant.CacheName;
-import com.kongfz.util.cache.constant.GeneratorName;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;

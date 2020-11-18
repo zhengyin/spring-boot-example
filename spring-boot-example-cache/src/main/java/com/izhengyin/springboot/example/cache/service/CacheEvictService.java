@@ -1,11 +1,11 @@
 package com.izhengyin.springboot.example.cache.service;
 
+import com.izhengyin.springboot.cache.annotation.CacheTarget;
+import com.izhengyin.springboot.cache.constant.CacheDrive;
+import com.izhengyin.springboot.cache.constant.CacheName;
+import com.izhengyin.springboot.cache.constant.GeneratorName;
 import com.izhengyin.springboot.example.cache.config.CacheKeyGeneratorConfig;
 import com.izhengyin.springboot.example.cache.controller.v1.TestController;
-import com.kongfz.util.cache.annotation.CacheTarget;
-import com.kongfz.util.cache.constant.CacheDrive;
-import com.kongfz.util.cache.constant.CacheName;
-import com.kongfz.util.cache.constant.GeneratorName;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
