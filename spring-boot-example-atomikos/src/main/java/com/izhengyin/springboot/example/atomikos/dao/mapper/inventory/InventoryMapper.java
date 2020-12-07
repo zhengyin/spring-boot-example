@@ -13,6 +13,11 @@ import java.util.List;
 @Mapper
 public interface InventoryMapper {
 
+    /**
+     * 通过itemId统计总数
+     * @param itemId
+     * @return
+     */
     @Select("SELECT COUNT(*) FROM t_inventory where item_id=#{itemId}")
     public int countByItemId(@Param("itemId") int itemId);
 
