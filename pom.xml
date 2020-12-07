@@ -17,6 +17,7 @@
         <module>spring-boot-example-cache</module>
         <module>spring-boot-example-transaction</module>
         <module>spring-boot-example-shardingsphere-jdbc</module>
+        <module>spring-boot-example-atomikos</module>
     </modules>
 
     <properties>
