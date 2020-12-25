@@ -5,6 +5,8 @@ import com.izhengyin.springboot.example.ssjdbc.dao.entity.Order;
 import com.izhengyin.springboot.example.ssjdbc.dao.mapper.OrderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Objects;
@@ -78,5 +80,17 @@ public class OrderService {
     }
 
 
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean transaction(){
+        //db 1 , table 1
+        orderMapper.del(1,1);
+
+        //db 0 , table 2
+        if(orderMapper.del(2,2) > 0){
+            //模拟抛出异常
+            throw new RuntimeException("Throw Exception!");
+        }
+        return true;
+    }
 
 }

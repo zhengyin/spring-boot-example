@@ -18,10 +18,10 @@ NEVER	        以非事务方式执行，如果当前存在事务，则抛出异
 NESTED	        如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。
 ```
 
-
 ## 测试
 
 * TransactionExampleServiceTest#readOnlyTest 只读测试
 * TransactionExampleServiceTest#rollbackTest 只读测试
 * TransactionExampleServiceTest#propagationRequiredTest REQUIRED 传递性测试
 * TransactionExampleServiceTest#propagationNotSupportTest NOT_SUPPORTED 传递性测试
+* TransactionExampleServiceTest#timeoutTest 超时测试

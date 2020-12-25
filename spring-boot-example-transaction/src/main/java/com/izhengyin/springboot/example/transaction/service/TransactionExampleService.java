@@ -3,6 +3,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.google.common.base.Preconditions;
 import com.izhengyin.springboot.example.transaction.dao.entity.Blog;
 import com.izhengyin.springboot.example.transaction.dao.mapper.BlogMapper;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -17,7 +20,7 @@ import java.util.stream.IntStream;
  * Created on 2020-12-01 13:41
  */
 @Service
-public class TransactionExampleService {
+public class TransactionExampleService  {
     private final JdbcTemplate jdbcTemplate;
     private final BlogMapper blogMapper;
     public TransactionExampleService(JdbcTemplate jdbcTemplate, BlogMapper blogMapper){

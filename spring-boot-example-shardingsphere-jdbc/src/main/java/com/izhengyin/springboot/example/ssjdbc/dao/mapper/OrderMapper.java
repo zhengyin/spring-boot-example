@@ -17,8 +17,14 @@ import java.util.List;
 @Mapper
 public interface OrderMapper extends BaseMapper<Order> {
 
-    @Delete("DELETE FROM t_order where ( seller_id=3)")
-    public int del();
+    /**
+     * 通过 sellerId, orderId 删除记录
+     * @param sellerId
+     * @param orderId
+     * @return
+     */
+    @Delete("DELETE FROM t_order where (seller_id=#{sellerId} AND order_id=#{orderId})")
+    public int del(@Param("sellerId") int sellerId , @Param("orderId") int orderId);
 
     @Select("SELECT * FROM t_order ORDER BY order_id ASC LIMIT #{offset} , #{size}")
     public List<Order> getList(@Param("offset") int offset , @Param("size") int size);

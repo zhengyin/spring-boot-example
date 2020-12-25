@@ -77,3 +77,31 @@ spring.datasource.order_2.password=zhengyin
          Assert.assertFalse(orderService.exists(4));
     }
 ```
+
+### XA 事务 (待解决)
+
+> 抛出异常后事务没有回滚，怀疑是数据源 Datasource 需要配置未XaDatasource，但是还未找到shardingsphere的如何配置的。
+
+``` 
+<!-- 使用 XA 事务时，需要引入此模块 -->
+<dependency>
+    <groupId>org.apache.shardingsphere</groupId>
+    <artifactId>shardingsphere-transaction-xa-core</artifactId>
+    <version>${shardingsphere.version}</version>
+</dependency>
+```
+
+``` 
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean transaction(){
+        //db 1 , table 1
+        orderMapper.del(1,1);
+
+        //db 0 , table 2
+        if(orderMapper.del(2,2) > 0){
+            //模拟抛出异常
+            throw new RuntimeException("Throw Exception!");
+        }
+        return true;
+    }
+```

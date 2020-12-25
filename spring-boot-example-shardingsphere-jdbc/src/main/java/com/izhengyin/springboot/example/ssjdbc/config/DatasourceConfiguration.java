@@ -1,5 +1,6 @@
 package com.izhengyin.springboot.example.ssjdbc.config;
 import com.izhengyin.springboot.example.ssjdbc.config.factory.DatasourceFactory;
+import com.izhengyin.springboot.example.ssjdbc.config.factory.XaDatasourceFactory;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
 import org.apache.shardingsphere.infra.config.algorithm.ShardingSphereAlgorithmConfiguration;
 import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
+import javax.sql.XADataSource;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,13 +34,13 @@ public class DatasourceConfiguration  implements EnvironmentAware {
 
     @Bean
     public DataSource shardingDataSource() throws SQLException {
+        DataSource order0DataSource = DatasourceFactory.createDatasource(environment,"spring.datasource.order_0");
         DataSource order1DataSource = DatasourceFactory.createDatasource(environment,"spring.datasource.order_1");
-        DataSource order2DataSource = DatasourceFactory.createDatasource(environment,"spring.datasource.order_2");
 
         // 配置真实数据源
         Map<String, DataSource> dataSourceMap = new HashMap<>();
-        dataSourceMap.put("ds0", order1DataSource);
-        dataSourceMap.put("ds1", order2DataSource);
+        dataSourceMap.put("ds0", order0DataSource);
+        dataSourceMap.put("ds1", order1DataSource);
 
         // 配置 t_order 表规则
         ShardingTableRuleConfiguration orderTableRuleConfig = new ShardingTableRuleConfiguration("t_order", "ds${0..1}.t_order_${0..2}");

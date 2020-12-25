@@ -44,5 +44,10 @@ public class OrderServiceTests {
          Assert.assertFalse(orderService.exists(4));
     }
 
+    @Test
+    public void transaction(){
+        orderService.transaction();
+    }
+
 
 }

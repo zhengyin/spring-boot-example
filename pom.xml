@@ -18,6 +18,8 @@
         <module>spring-boot-example-transaction</module>
         <module>spring-boot-example-shardingsphere-jdbc</module>
         <module>spring-boot-example-atomikos</module>
+        <module>spring-boot-example-gateway-web-agent</module>
+        <module>spring-boot-example-soul</module>
     </modules>
 
     <properties>
