@@ -1,5 +1,6 @@
 package com.izhengyin.springboot.example.transaction.service;
 
+import com.izhengyin.springboot.example.transaction.Sleep;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,4 +32,6 @@ public class TransactionPropagationService {
         this.transactionExampleService.PROPAGATION_REQUIRED(2,false);
         this.transactionExampleService.PROPAGATION_NOT_SUPPORTED(3,true);
     }
+
+
 }

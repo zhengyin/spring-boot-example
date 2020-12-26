@@ -81,10 +81,9 @@ public class TransactionExampleServiceTest {
 
     @Test
     public void timeoutTest(){
-        Assert.assertThrows(TransactionTimedOutException.class,() -> transactionTimeoutService.timeout(4));
-        int blogId = 1;
-        Assert.assertEquals(4,transactionTimeoutService.timeoutNotWork(4,blogId));
-        Assert.assertFalse(transactionExampleService.exists(blogId));
+        Assert.assertThrows(TransactionTimedOutException.class,() -> transactionTimeoutService.timeout(4,1));
+        Assert.assertTrue(transactionExampleService.exists(1));
+        Assert.assertEquals(4,transactionTimeoutService.timeoutNotWork(4,2));
+        Assert.assertFalse(transactionExampleService.exists(2));
     }
-
 }

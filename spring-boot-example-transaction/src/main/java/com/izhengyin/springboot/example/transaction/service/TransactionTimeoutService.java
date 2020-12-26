@@ -19,17 +19,29 @@ public class TransactionTimeoutService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * 数据不会被删除
+     * @param timeout
+     * @param blogId
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class , propagation = Propagation.REQUIRED,timeout = 3)
-    public int timeout(int timeout){
-        jdbcTemplate.execute("SELECT 1");
+    public int timeout(int timeout,int blogId){
+        jdbcTemplate.execute("DELETE FROM blog where id = "+blogId);
         Sleep.second(timeout);
         jdbcTemplate.execute("SELECT 1");
         return timeout;
     }
 
+    /**
+     * 数据会被删除
+     * @param timeout
+     * @param blogId
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class , propagation = Propagation.REQUIRED,timeout = 3)
-    public int timeoutNotWork(int timeout , int delId){
-        jdbcTemplate.execute("DELETE FROM blog where id = "+delId);
+    public int timeoutNotWork(int timeout , int blogId){
+        jdbcTemplate.execute("DELETE FROM blog where id = "+blogId);
         Sleep.second(timeout);
         return timeout;
     }
