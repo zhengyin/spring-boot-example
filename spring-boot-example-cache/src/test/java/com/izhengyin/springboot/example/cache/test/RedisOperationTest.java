@@ -1,5 +1,6 @@
 package com.izhengyin.springboot.example.cache.test;
 
+import com.google.common.primitives.Ints;
 import com.izhengyin.springboot.example.cache.config.RedisMessageListenerConfiguration;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -80,9 +81,29 @@ public class RedisOperationTest {
     @Test
     public void counter(){
         String inventoryKey = "inventory";
-        IntStream.range(0,5).forEach(i -> stringRedisTemplate.opsForValue().increment(inventoryKey));
-        IntStream.range(0,3).forEach(i -> stringRedisTemplate.opsForValue().decrement(inventoryKey));
-        Assert.assertEquals("2",stringRedisTemplate.opsForValue().get(inventoryKey));
+        String inventoryLockKey = "inventory-lock";
+        stringRedisTemplate.opsForValue().set(inventoryKey,10+"");
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        IntStream.range(0,100)
+                .forEach(i -> {
+                    executorService.execute(() -> {
+                        try {
+                            //锁1秒超时
+                            boolean obtainLock = Optional.ofNullable(stringRedisTemplate.opsForValue()
+                                    .setIfAbsent("inventory-lock","1",3, TimeUnit.SECONDS))
+                                    .orElse(false);
+                            if(!obtainLock){
+                                return;
+                            }
+                            int residue = Optional.ofNullable(stringRedisTemplate.opsForValue().get(inventoryKey)).map(Integer::parseInt).orElse(0);
+                            if(residue > 0){
+                                System.out.println("剩余库存 " + stringRedisTemplate.opsForValue().decrement(inventoryKey));
+                            }
+                        }finally {
+                            stringRedisTemplate.delete(inventoryLockKey);
+                        }
+                    });
+                });
     }
 
     @Test
