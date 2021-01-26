@@ -28,22 +28,6 @@ public class TransactionExampleService  {
         this.blogMapper = blogMapper;
     }
 
-    @PostConstruct
-    public void postConstruct(){
-        jdbcTemplate.execute("DROP TABLE IF EXISTS `blog`");
-        jdbcTemplate.execute("CREATE TABLE `blog` (\n" +
-                "  `id` int unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `title` varchar(255) NOT NULL DEFAULT '',\n" +
-                "  `content` text NOT NULL,\n" +
-                "  PRIMARY KEY (`id`)\n" +
-                ") ENGINE=InnoDB");
-        String insertSqlTpl = "INSERT INTO blog (title,content) VALUES ('title-{}','content-{}')";
-        IntStream
-                .range(1,101)
-                .forEach(i -> jdbcTemplate.execute(insertSqlTpl.replace("{}",i+"")));
-
-    }
-
     @Transactional(rollbackFor = Exception.class , isolation = Isolation.REPEATABLE_READ)
     public boolean rollback(int id){
         blogMapper.deleteById(id);

@@ -19,7 +19,8 @@
         <module>spring-boot-example-shardingsphere-jdbc</module>
         <module>spring-boot-example-atomikos</module>
         <module>spring-boot-example-gateway-web-agent</module>
-        <module>spring-boot-example-soul</module>
+        <module>spring-boot-example-h2</module>
+        <module>spring-boot-example-grpc</module>
     </modules>
 
     <properties>
