@@ -28,7 +28,7 @@ public class HelloWorldServer {
                 .addService(new GreeterImpl())
                 .build()
                 .start();
-        logger.info("Server started, listening on " + server.getPort());
+        logger.info(" Server started, listening on " + server.getPort());
     }
 
     public void stop() throws InterruptedException {

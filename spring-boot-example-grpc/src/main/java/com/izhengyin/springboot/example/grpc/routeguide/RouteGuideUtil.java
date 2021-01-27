@@ -17,6 +17,8 @@
 package com.izhengyin.springboot.example.grpc.routeguide;
 
 import com.google.protobuf.util.JsonFormat;
+import com.izhengyin.springboot.example.grpc.server.RouteGuideServer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

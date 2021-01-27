@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.izhengyin.springboot.example.grpc.routeguide;
+package com.izhengyin.springboot.example.grpc.server;
 
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
@@ -25,9 +25,12 @@ import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
+import com.izhengyin.springboot.example.grpc.routeguide.*;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,11 +46,16 @@ import java.util.logging.Logger;
 /**
  * A sample gRPC server that serve the RouteGuide (see route_guide.proto) service.
  */
+@Service
 public class RouteGuideServer {
   private static final Logger logger = Logger.getLogger(RouteGuideServer.class.getName());
 
   private final int port;
   private final Server server;
+
+  public RouteGuideServer() throws IOException {
+      this(50053);
+  }
 
   public RouteGuideServer(int port) throws IOException {
     this(port, RouteGuideUtil.getDefaultFeaturesFile());
@@ -98,15 +106,6 @@ public class RouteGuideServer {
     if (server != null) {
       server.awaitTermination();
     }
-  }
-
-  /**
-   * Main method.  This comment makes the linter happy.
-   */
-  public static void main(String[] args) throws Exception {
-    RouteGuideServer server = new RouteGuideServer(8980);
-    server.start();
-    server.blockUntilShutdown();
   }
 
   /**

@@ -2,6 +2,7 @@ package com.izhengyin.springboot.example.grpc;
 
 import com.izhengyin.springboot.example.grpc.server.HelloWorldServer;
 import com.izhengyin.springboot.example.grpc.server.ManualFlowControlServer;
+import com.izhengyin.springboot.example.grpc.server.RouteGuideServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;
@@ -27,6 +28,7 @@ public class GrpcApplication {
         public void onApplicationEvent(ApplicationStartedEvent event) {
             runHelloWorldServer(event);
             runManualFlowControlServer(event);
+            runRouteGuideServer(event);
         }
 
         /**
@@ -78,6 +80,29 @@ public class GrpcApplication {
                     }
                 }
             });
+        }
+
+
+        private void runRouteGuideServer(ApplicationStartedEvent event){
+            final RouteGuideServer server = event.getApplicationContext().getBean(RouteGuideServer.class);
+            try {
+                server.start();
+            }catch (Exception e){
+
+            }
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    // Use stderr here since the logger may have been reset by its JVM shutdown hook.
+                    System.err.println("Shutting down");
+                    try {
+                        server.stop();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace(System.err);
+                    }
+                }
+            });
+
         }
     }
 
