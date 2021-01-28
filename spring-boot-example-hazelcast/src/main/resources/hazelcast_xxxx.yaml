@@ -1,0 +1,6 @@
+hazelcast:
+  cluster-name: example-hazelcast
+  map:
+    "-name": tMap
+      max-size: 3
+      backup-count: 1
