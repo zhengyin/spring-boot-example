@@ -71,9 +71,7 @@ public class ReferenceTestController {
     private void mockDelay() throws InterruptedException{
         Random random = new Random();
         long timeout = 3000 + random.nextInt(100);
-        System.out.println(System.currentTimeMillis()+" , timeout "+timeout);
         TimeUnit.MILLISECONDS.sleep(timeout);
-        System.out.println(System.currentTimeMillis()+" , timeout "+timeout);
     }
 
     private static class Student implements Serializable {
