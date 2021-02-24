@@ -23,6 +23,20 @@
 
 ```
 
+3. 测试 publish / subscribe 
+
+> 执行后观察控制台日志输出
+
+``` 
+ curl -X POST http://127.0.0.1:8080/publish
+```
+
+``` 
+➜  spring-boot-example git:(master) ✗ curl --data "key=key1&value=hazelcast" "http://localhost:8080/put"
+➜  spring-boot-example git:(master) ✗ curl "http://localhost:8081/get?key=key1"
+
+```
+
 3. 测试引用对象的修改
 
 > 
@@ -30,8 +44,16 @@
 ``` 
 curl -X POST http://127.0.0.1:8080/student/a
 curl http://127.0.0.1:8081/students  
+
+>>> 同时运行下面的命令
 curl -X POST  http://127.0.0.1:8080/mockConcurrentUpdate/a/course/c1 &
-curl -X POST  http://127.0.0.1:8080/mockConcurrentUpdate/a/course/c2 &
+curl -X POST  http://127.0.0.1:8081/mockConcurrentUpdate/a/course/c2 &
+curl -X POST  http://127.0.0.1:8080/mockConcurrentUpdate/a/course/c3 &
+curl -X POST  http://127.0.0.1:8081/mockConcurrentUpdate/a/course/c4 &
+curl -X POST  http://127.0.0.1:8080/mockConcurrentUpdate/a/course/c5 &
+
+>>> 所有指令都返回后
+
 curl http://127.0.0.1:8081/students  
 ```
 

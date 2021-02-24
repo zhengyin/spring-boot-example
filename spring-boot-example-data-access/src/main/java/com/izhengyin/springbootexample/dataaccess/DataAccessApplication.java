@@ -1,16 +1,15 @@
-package com.izhengyin.springboot.example.hazelcast;
+package com.izhengyin.springbootexample.dataaccess;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 /**
  * @author zhengyin zhengyinit@outlook.com
- * Created on 2021-01-28 11:46
+ * Created on 2021-02-23 17:35
  */
 @SpringBootApplication
-public class HazelcastApplication {
+public class DataAccessApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HazelcastApplication.class,args);
+        SpringApplication.run(DataAccessApplication.class,args);
     }
 }

@@ -32,10 +32,13 @@ public class ReferenceTestController {
 
     @PostMapping("/student/{name}")
     public Student createStudent(@PathVariable String name){
+        if(studentIMap.containsKey(name)){
+            throw new RuntimeException("Student["+name+"] is exists!");
+        }
         Student student = new Student();
         student.setName(name);
-        List<String> cousers = student.getCourses(hazelcastInstance);
-        cousers.addAll(Stream.of(1,2,3).map(i -> "couser-"+i).collect(Collectors.toList()));
+        List<String> courses = student.getCourses(hazelcastInstance);
+        courses.addAll(Stream.of(1,2,3).map(i -> "couser-"+i).collect(Collectors.toList()));
         return  studentIMap.put(name,student);
     }
 

@@ -22,6 +22,7 @@
         <module>spring-boot-example-h2</module>
         <module>spring-boot-example-grpc</module>
         <module>spring-boot-example-hazelcast</module>
+        <module>spring-boot-example-data-access</module>
     </modules>
 
     <properties>

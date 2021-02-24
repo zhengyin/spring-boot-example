@@ -29,6 +29,8 @@ public class CommandController {
         this.testTopic = this.hazelcastInstance.getTopic("tTopic");
         this.testMap = this.hazelcastInstance.getMap("tMap");
 
+        
+
         IntStream.range(0,10000)
                 .forEach(i ->  this.testMap.put("key"+i,i+""));
     }
